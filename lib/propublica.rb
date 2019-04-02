@@ -43,7 +43,9 @@ class ProPublica
 
     response = get_response_from_api(url)
     raw_senate_members_data = JSON.parse(response.body)
-    deep_symbolize_keys(raw_senate_members_data)
+    senate_members_response = deep_symbolize_keys(raw_senate_members_data)
+    senate_members = senate_members_response[:results].first[:members]
+    return senate_members
   end
 
   def get_house_members(congress_number)
@@ -52,7 +54,9 @@ class ProPublica
 
     response = get_response_from_api(url)
     raw_house_members_data = JSON.parse(response.body)
-    deep_symbolize_keys(raw_house_members_data)
+    house_members_response = deep_symbolize_keys(raw_house_members_data)
+    house_members = house_members_response[:results].first[:members]
+    return house_members
   end
 
   def get_member(congressional_id)
