@@ -72,6 +72,9 @@ class ProPublica
 
     response = get_response_from_api(url)
     vote_data = JSON.parse(response.body)
+    if vote_data
+      vote_data = vote_data['results']
+    end
     deep_symbolize_keys vote_data
   end
 
